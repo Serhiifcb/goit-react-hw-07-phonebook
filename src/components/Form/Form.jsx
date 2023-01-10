@@ -6,7 +6,7 @@ import { add } from "redux/store";
 
 export const Form = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -18,11 +18,11 @@ export const Form = () => {
       alert(`Number ${form.elements.number.value} is already in contacts`);
       return;
     }
-    dispatch(add({
-      id: nanoid(8),
-      name: form.elements.name.value,
-      number: form.elements.number.value
-    }))
+    // dispatch(add({
+    //   id: nanoid(8),
+    //   name: form.elements.name.value,
+    //   number: form.elements.number.value
+    // }))
     form.reset();
   };
 
