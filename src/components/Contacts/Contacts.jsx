@@ -1,7 +1,7 @@
-import css from "../Contacts/Contacts.module.css";
+import css from "./Contacts.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 // import { remove } from 'redux/store';
-import * as contactsOperations from '../../redux/contacts/contactsOperations' 
+import { contactsOperations, contactsSelectors } from 'redux/contacts'; 
 import { useEffect } from "react";
   
 export const Contacts = () => {
@@ -10,9 +10,12 @@ export const Contacts = () => {
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts())
   }, [dispatch]);
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(contactsSelectors.getContacts);
+  const filter = useSelector(contactsSelectors.getFilter);
   const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
+  const deleteItem = (id) => {
+    dispatch(contactsOperations.deleteContact(id));
+  }
   
   return (
     <div className={css.contactListBlock}>
@@ -21,7 +24,7 @@ export const Contacts = () => {
         <li className={css.contactItem} key={id}>
           <span className={css.spanContact}></span>
             {name}: {number}
-          <button className={css.buttonDeleteContact}>Видалити</button>
+          <button className={css.buttonDeleteContact} onClick={() => deleteItem(id)}>Видалити</button>
           {/* <button className={css.buttonDeleteContact} onClick={() => dispatch(remove(id))}>Видалити</button> */}
         </li>
           

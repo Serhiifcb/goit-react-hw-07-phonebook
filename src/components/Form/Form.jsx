@@ -1,12 +1,13 @@
 import React from "react";
-import css from "../Form/Form.module.css"
-import { nanoid } from "nanoid";
-import { useDispatch, useSelector } from "react-redux";
-import { add } from "redux/store";
+import css from "./Form.module.css"
+// import { nanoid } from "nanoid";
+import { useSelector } from "react-redux";
+import { contactsSelectors } from 'redux/contacts';
+// import { add } from "redux/store";
 
 export const Form = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+  // const dispatch = useDispatch();
+  const contacts = useSelector(contactsSelectors.getContacts);
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.currentTarget;
