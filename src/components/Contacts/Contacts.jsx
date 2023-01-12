@@ -1,6 +1,5 @@
 import css from "./Contacts.module.css";
 import { useSelector, useDispatch } from 'react-redux';
-// import { remove } from 'redux/store';
 import { contactsOperations, contactsSelectors } from 'redux/contacts'; 
 import { useEffect } from "react";
   
@@ -25,7 +24,6 @@ export const Contacts = () => {
           <span className={css.spanContact}></span>
             {name}: {number}
           <button className={css.buttonDeleteContact} onClick={() => deleteItem(id)}>Видалити</button>
-          {/* <button className={css.buttonDeleteContact} onClick={() => dispatch(remove(id))}>Видалити</button> */}
         </li>
           
         ))) : <p>There are no contacts</p>}

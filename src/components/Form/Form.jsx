@@ -1,12 +1,10 @@
 import React from "react";
 import css from "./Form.module.css"
-// import { nanoid } from "nanoid";
-import { useSelector } from "react-redux";
-import { contactsSelectors } from 'redux/contacts';
-// import { add } from "redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { contactsOperations, contactsSelectors } from 'redux/contacts';
 
 export const Form = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const contacts = useSelector(contactsSelectors.getContacts);
   const handleSubmit = event => {
     event.preventDefault();
@@ -19,11 +17,10 @@ export const Form = () => {
       alert(`Number ${form.elements.number.value} is already in contacts`);
       return;
     }
-    // dispatch(add({
-    //   id: nanoid(8),
-    //   name: form.elements.name.value,
-    //   number: form.elements.number.value
-    // }))
+    dispatch(contactsOperations.addContact({
+      name: form.elements.name.value,
+      number: form.elements.number.value
+    }))
     form.reset();
   };
 
